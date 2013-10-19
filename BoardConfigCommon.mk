@@ -27,8 +27,12 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_SMP := true
 
-# Power HAL
-TARGET_PROVIDES_POWERHAL := true
+# Use the CM PowerHAL
+TARGET_USES_CM_POWERHAL := true
+CM_POWERHAL_EXTENSION := qcom
+
+# Lights HAL
+TARGET_PROVIDES_LIBLIGHT := true
 
 # Graphics
 ifeq ($(TARGET_QCOM_DISPLAY_VARIANT),)
@@ -87,6 +91,7 @@ BOARD_SEPOLICY_UNION += \
     file.te \
     kickstart.te \
     init.te \
+    mac_update.te \
     mediaserver.te \
     mpdecision.te \
     netmgrd.te \
