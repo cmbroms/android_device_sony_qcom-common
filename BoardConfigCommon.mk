@@ -27,8 +27,12 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_SMP := true
 
-# Power HAL
-TARGET_PROVIDES_POWERHAL := true
+# Use the CM PowerHAL
+TARGET_USES_CM_POWERHAL := true
+CM_POWERHAL_EXTENSION := qcom
+
+# Lights HAL
+TARGET_PROVIDES_LIBLIGHT := true
 
 # Graphics
 ifeq ($(TARGET_QCOM_DISPLAY_VARIANT),)
@@ -48,12 +52,15 @@ endif
 
 # RIL
 BOARD_PROVIDES_LIBRIL := true
+BOARD_RIL_NO_CELLINFOLIST := true
+BOARD_USES_QCOM_RIL_RESPONSE_5_ELEMENTS := true
 
 # Audio
 ifeq ($(TARGET_QCOM_AUDIO_VARIANT),)
 TARGET_QCOM_AUDIO_VARIANT := caf
 endif
 TARGET_USES_QCOM_COMPRESSED_AUDIO := true
+BOARD_USES_LEGACY_ALSA_AUDIO := true
 
 # Media
 ifeq ($(TARGET_QCOM_MEDIA_VARIANT),)
@@ -87,10 +94,10 @@ BOARD_SEPOLICY_UNION += \
     file.te \
     kickstart.te \
     init.te \
+    mac_update.te \
     mediaserver.te \
     mpdecision.te \
     netmgrd.te \
-    property.te \
     qmux.te \
     rild.te \
     rmt.te \
