@@ -11,5 +11,8 @@ unix_socket_send(system, mpdecision, mpdecision)
 allow system mpdecision:unix_stream_socket sendto;
 allow system mpdecision_socket:dir search;
 
+allow system qmux_radio_socket:sock_file create_file_perms;
+allow system qmux_radio_socket:dir rw_dir_perms;
+
 allow system sysfs:file { read open write };
 allow system self:capability { sys_module };
